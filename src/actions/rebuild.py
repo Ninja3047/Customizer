@@ -282,8 +282,9 @@ def main():
     misc.system_command(('xorriso', '-as', 'mkisofs', '-r', '-V', \
         distrib + '-' + arch + '-' + release, '-b', 'isolinux/isolinux.bin', \
         '-c', 'isolinux/boot.cat', '-J', '-l', '-no-emul-boot', \
-        '-boot-load-size', '4', '-boot-info-table', '-o', iso_file, \
-        '-cache-inodes', '-input-charset', 'utf-8', '.'))
+        '-boot-load-size', '4', '-boot-info-table', '-eltorito-alt-boot', \
+        '-eltorito-platform', '0xEF', '-eltorito-boot', 'isolinux/efiboot.img', \
+        '-o', iso_file, '-cache-inodes', '-input-charset', 'utf-8', '.'))
 
     message.sub_info('Creating ISO checksums')
     md5checksum = misc.generate_hash_for_file('md5', iso_file)
